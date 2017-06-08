@@ -24,7 +24,7 @@ Response
     sync ready
     Sync no error on startup
     
-To run the client open _index.html_ in a browser when the server is running
+To run the client open _./public/index.html_ in a browser when the server is running
 
 You won't see anything running in the browser until you check the developer tools (ctrl/shift/i)
 Check the network tabs and console tabs to see sync in action. 
