@@ -8,22 +8,23 @@ var path = require('path');
 var cors = require('cors');
 var app = express();
 
+//connection strings for mongo and redis
 var mongodbConnectionString = 'mongodb://127.0.0.1:27017/sync';
 var redisUrl = 'redis://127.0.0.1:6379';
 
-var id = "myShoppingList";
+var id = "data";//id set by the client
 
-
+//middleware for express
 app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
+//setup default route
 app.get ('/', function(req,res){
   res.send('Server is running');
 });
 
-// mongo options are an empty object {}
+//connect sync to the databases, mongo options are an empty object {}
 sync.api.connect(mongodbConnectionString, {}, redisUrl, function(err){
   if(err){
     console.log('Error at connect: '+ err);
@@ -33,18 +34,13 @@ sync.api.connect(mongodbConnectionString, {}, redisUrl, function(err){
   }
 });
 
-
+//id set by the client
 app.post('/sync/:id',function(req, res){
   var dataset_id = req.params.id;
   var params = req.body;
-  // var params = {
-  //   fn: 'sync',
-  //   dataset_id: id
-  // };
-
   sync.api.invoke(dataset_id, params, function (err, result){
     if(err){
-      console.log('Error at invoke: '+err)
+      console.log('Error at invoke: '+err);
       return res.status(500).json(err);
     }
     return res.json(result);
@@ -52,7 +48,7 @@ app.post('/sync/:id',function(req, res){
 });
 
 function activateForDataset(id){
-  //???? sync documentation I think
+  //sync API init documentation https://access.redhat.com/documentation/en-us/red_hat_mobile_application_platform_hosted/3/html/cloud_api/fh-sync
   var option = {
     syncFrequency: 10,//seconds
     logLevel:'info'
@@ -63,12 +59,14 @@ function activateForDataset(id){
     }else{
       //read api docs to figure out what is happening here???
       sync.api.handleList(id, function(id, params, value ,meta_data){
-        console.log('something should be here but I know not what?')
+        console.log('Should be a mongo query here and its response should be returned with value');
+        //return value(null, mongodata)
       });
     }
   });
 }
 
+// see github readme https://github.com/feedhenry/fh-sync
 sync.api.getEventEmitter().on('sync:ready', function() {
   console.log('sync ready');
 
@@ -77,6 +75,7 @@ sync.api.getEventEmitter().on('sync:ready', function() {
   }, function() {});
 });
 
+//express standard
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
