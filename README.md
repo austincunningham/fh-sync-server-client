@@ -4,6 +4,8 @@ To install git clone this repo then cd into the new directory and run
 
     npm install
 
+# Dependencies 
+
 You will need a local Mongodb server and Redis server for information on setting up these 
 
 For Mongodb see
@@ -13,6 +15,8 @@ https://docs.mongodb.com/manual/installation/
 For Redis see 
 
 https://redis.io/topics/quickstart
+
+# Getting Started
 
 To run the server 
     
@@ -28,3 +32,9 @@ To run the client open _./public/index.html_ in a browser when the server is run
 
 You won't see anything running in the browser until you check the developer tools (ctrl/shift/i)
 Check the network tabs and console tabs to see sync in action. 
+
+For more information on browser developer tools see
+
+https://developer.chrome.com/devtools
+
+https://developer.mozilla.org/en-US/docs/Tools/Tools_Toolbox
