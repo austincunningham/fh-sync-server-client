@@ -2,9 +2,11 @@
 
 To install git clone this repo then cd into the new directory and run 
 
+```bash
     npm install
+```
 
-# Dependencies 
+## Dependencies 
 
 You will need a local Mongodb server and Redis server for information on setting up these 
 
@@ -16,17 +18,23 @@ For Redis see
 
 https://redis.io/topics/quickstart
 
-# Getting Started
+## Getting Started
 
 To run the server 
-    
+
+```bash
     node app
+```    
+   
 
 Response 
 
+```bash 
     Example app listening on port 3000!
     sync ready
     Sync no error on startup
+    
+```
     
 To run the client open _./public/index.html_ in a browser when the server is running
 
